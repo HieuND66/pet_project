@@ -1,89 +1,117 @@
-
-.login{
-    background-color: #080710;
+.login {
+    background-image: url("https://images.unsplash.com/photo-1500206859124-9f13895ce7da?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=885");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    object-fit: cover;
     width: 100%;
     height: 750px;
+    color: white;
+
+    position: relative;
 }
-.background{
+.suggest {
+    text-align: center;
+    padding: 10px 0;
+    h4 {
+        background-color: #1845ad;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        &:hover {
+            background-color: #0e3ba5;
+        }
+    }
+    .suggest-text {
+        padding-top: 60px;
+        display: none;
+
+        &.active {
+            display: block;
+        }
+    }
+}
+.background {
     width: 430px;
     height: 520px;
     position: absolute;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     left: 50%;
     top: 50%;
 }
-.background .shape{
+.background .shape {
     height: 200px;
     width: 200px;
     position: absolute;
     border-radius: 50%;
 }
-.shape:first-child{
-    background: linear-gradient(
-        #1845ad,
-        #23a2f6
-    );
+.shape:first-child {
+    background: linear-gradient(#1845ad, #23a2f6);
     left: -80px;
-    top: -80px;
+    top: 5%;
 }
-.shape:last-child{
-    background: linear-gradient(
-        to right,
-        #ff512f,
-        #f09819
-    );
-    right: -30px;
+.shape:last-child {
+    background: linear-gradient(to right, #ff512f, #f09819);
+    right: 50%;
     bottom: -80px;
 }
-.login form{
+.login form {
     height: 520px;
     width: 400px;
-    background-color: rgba(255,255,255,0.13);
+    background-color: rgba(255, 255, 255, 0.13);
     position: absolute;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     top: 50%;
     left: 50%;
+    margin-top: 10px;
     border-radius: 10px;
     backdrop-filter: blur(10px);
-    border: 2px solid rgba(255,255,255,0.1);
-    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
     padding: 50px 35px;
 }
-.login form *{
-    font-family: 'Poppins',sans-serif;
+.login form * {
+    font-family: "Poppins", sans-serif;
     color: #ffffff;
     letter-spacing: 0.5px;
     outline: none;
     border: none;
 }
-.login form h3{
+.login form h3 {
     font-size: 32px;
     font-weight: 500;
     line-height: 42px;
     text-align: center;
 }
 
-.login label{
+.login label {
     display: block;
     margin-top: 30px;
     font-size: 16px;
     font-weight: 500;
 }
-.login input{
+.login input {
     display: block;
     height: 50px;
     width: 100%;
-    background-color: rgba(255,255,255,0.07);
+    background-color: rgba(255, 255, 255, 0.07);
     border-radius: 3px;
     padding: 0 10px;
     margin-top: 8px;
     font-size: 14px;
     font-weight: 300;
 }
-::placeholder{
+::placeholder {
     color: #e5e5e5;
 }
-.login button{
+.login button {
     margin-top: 50px;
     width: 100%;
     background-color: #ffffff;

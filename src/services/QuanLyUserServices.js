@@ -8,8 +8,11 @@ export class QuanLyUserServices extends baseService {
   }
 
   dangNhap = (thongTinDangNhap) =>{
-    console.log('ee');
     return this.post(`/v2/oauth2/token`, thongTinDangNhap)
+  }
+
+  lay = (token) =>{
+    return this.get(`/v2/animals`, token)
   }
 }
 

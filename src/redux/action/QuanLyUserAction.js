@@ -1,5 +1,5 @@
 import { quanLyUserServices } from "../../services/QuanLyUserServices"
-import { DANG_NHAP_ACTION } from "./type/QuanLyUserType";
+import { DANG_NHAP_ACTION, LAY_ACTION } from "./type/QuanLyUserType";
 
 
 export const dangNhapAction = (thongTinDangNhap) =>{
@@ -10,21 +10,22 @@ export const dangNhapAction = (thongTinDangNhap) =>{
     try {
 
       const result = await quanLyUserServices.dangNhap(thongTinDangNhap);
-      console.log(result);
-      // if(result.data.status === 200){
-      //   dispatch({
-      //     type:DANG_NHAP_ACTION,
-      //     thongTinDangNhap: result.animals
-      //   })
-      // }
-      dispatch({
-        type:DANG_NHAP_ACTION,
-        thongTinDangNhap: result
 
-      })
-      console.log('result', result);
+      if(result.status === 200){
+        dispatch({
+          type: DANG_NHAP_ACTION,
+          thongTinDangNhap: result.data.access_token
+        })
+      }
+      // dispatch({
+      //   type:DANG_NHAP_ACTION,
+      //   thongTinDangNhap: result
+
+      // })
+      // console.log('result', result.data.access_token);
     } catch (error) {
       console.log(error);
     }
   }
 }
+

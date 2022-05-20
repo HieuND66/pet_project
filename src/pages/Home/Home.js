@@ -1,59 +1,48 @@
-import React,{ useEffect, createContext} from 'react'
-import GetAPI from './GetAPI';
+import React, { useEffect } from 'react'
 import './home.scss'
+import { useDispatch, useSelector } from 'react-redux'
+import { layAction } from '../../redux/action/QuanLyPetAction'
+import { history } from '../../App';
 
-export const AuthContext = createContext();
 
 export default function Home(props) {
+  const dispatch = useDispatch();
 
-  const petFinderKey = 'v3YvEB7MQAmosLDjPHKa3LWyfEikMU5GVzZqNLF77lFP2hsKuQ'
-  const petFinderSecret = '91BEGtP8Iv5UcmGpEljgKTzYCmNwUAvCwMSyFi1H'
-    useEffect(() => {
-      const fetchAccessToken = async() =>{
-        const params = new URLSearchParams();
-        params.append('grant_type', 'client_credentials');
-        params.append('client_id', petFinderKey);
-        params.append('client_secret', petFinderSecret);
-        const petFindRes = await fetch(
-          'https://api.petfinder.com/v2/oauth2/token',{
-            method: "POST",
-            body: params
-          }
-        );
-        
-        console.log(await petFindRes.json());
-      };
-      fetchAccessToken()
-    }, [])
+  const { arrPet } = useSelector(state => state.QuanLyPetReducer);
 
-  return (
-    
-    <div className='container'>
 
-      <div className="card__container">
+  useEffect(() => {
+    const action = layAction(localStorage.getItem('USER_LOGIN'));
+    dispatch(action);
+  }, [])
+
+  const renderPets = () => {
+    return arrPet.map((pet, index) => {
+      return <div className="grid__item" key={index}>
         <div className="card">
+          {pet.photos.length !== 0 ? <img src={pet.photos[0].large} alt="" className="card__img" /> : <img src="https://i.picsum.photos/id/1062/5092/3395.jpg?hmac=o9m7qeU51uOLfXvepXcTrk2ZPiSBJEkiiOp-Qvxja-k" alt="" className="card__img" />}
           <div className="card__content">
-            <h3 className="card__header">Card 1</h3>
-            <p className="card__info">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-            <button className="card__button">Read now</button>
-          </div>
-        </div>
-        <div className="card">
-          <div className="card__content">
-            <h3 className="card__header">Card 2</h3>
-            <p className="card__info">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-            <button className="card__button">Read now</button>
-          </div>
-        </div>
-        <div className="card">
-          <div className="card__content">
-            <h3 className="card__header">Card 3</h3>
-            <p className="card__info">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-            <button className="card__button">Read now</button>
+            <h1 className="card__header">{pet.name}</h1>
+            <p className="card__text">species: {pet.species}</p>
+            <p className="card__text">size: {pet.size}</p>
+            <p className="card__text">gender: {pet.gender}</p>
+            <a href={pet.url} target='_blank' className="card__btn" >View Detail</a>
           </div>
         </div>
       </div>
+    })
+  }
 
-    </div>
-  )
+  if (localStorage.getItem('USER_LOGIN')) {
+    return (
+      <div className='container category_pet'>
+        {localStorage.getItem('USER_LOGIN') ? <div className="grid">
+          {renderPets()}
+        </div> : history.goBack()}
+      </div>
+    )
+  } else {
+    history.push("/login")
+    return null
+  }
 }
